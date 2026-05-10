@@ -1,5 +1,5 @@
 # =========================================
-# 1. LINEAR REGRESSION
+# LINEAR REGRESSION
 # =========================================
 
 import numpy as np

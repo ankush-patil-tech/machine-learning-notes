@@ -1,14 +1,9 @@
-Perfect — now we’re entering one of the **most important models for interviews + real-world ML** 🔥
+# =========================================
 
----
+# RANDOM FOREST
 
 # =========================================
 
-# 4. RANDOM FOREST
-
-# =========================================
-
-```python id="rf001"
 # =========================================
 # IMPORTS
 # =========================================
@@ -34,7 +29,7 @@ y_pred = model.predict(X_test)
 # Final prediction is based on majority voting (classification).
 
 # Used for: fraud detection, recommendation systems, risk analysis
-```
+
 
 ---
 
@@ -44,7 +39,7 @@ y_pred = model.predict(X_test)
 
 # =========================================
 
-```python id="rf002"
+
 # How it works:
 # Step 1: Create multiple random samples of data (bootstrapping)
 # Step 2: Train a decision tree on each sample
@@ -56,7 +51,7 @@ y_pred = model.predict(X_test)
 
 # Advantage:
 # Reduces overfitting compared to single decision tree
-```
+
 
 ---
 
@@ -66,7 +61,7 @@ y_pred = model.predict(X_test)
 
 # =========================================
 
-```python id="rf003"
+
 # Bagging (Bootstrap Aggregation):
 # Random samples of data are used to train each tree.
 
@@ -75,7 +70,7 @@ y_pred = model.predict(X_test)
 
 # Result:
 # Trees become less correlated → better performance.
-```
+
 
 ---
 
@@ -85,7 +80,7 @@ y_pred = model.predict(X_test)
 
 # =========================================
 
-```python id="rf004"
+
 accuracy = accuracy_score(y_test, y_pred)
 precision = precision_score(y_test, y_pred)
 recall = recall_score(y_test, y_pred)
@@ -95,7 +90,7 @@ print("Accuracy:", accuracy)
 print("Precision:", precision)
 print("Recall:", recall)
 print("F1 Score:", f1)
-```
+
 
 ---
 
@@ -105,14 +100,14 @@ print("F1 Score:", f1)
 
 # =========================================
 
-```python id="rf005"
+
 # Accuracy → overall performance
 
 # Precision → important when false positives matter
 # Recall → important when missing positives is risky
 
 # F1 Score → balance between precision and recall
-```
+
 
 ---
 
@@ -122,15 +117,13 @@ print("F1 Score:", f1)
 
 # =========================================
 
-```python id="rf006"
 cm = confusion_matrix(y_test, y_pred)
 print("Confusion Matrix:\n", cm)
-```
 
-```python id="rf007"
+
 # Helps analyze types of classification errors.
 # Useful in imbalanced datasets.
-```
+
 
 ---
 
@@ -140,7 +133,6 @@ print("Confusion Matrix:\n", cm)
 
 # =========================================
 
-```python id="rf008"
 import pandas as pd
 
 feature_importance = pd.Series(model.feature_importances_, index=feature_names)
@@ -148,12 +140,11 @@ feature_importance = pd.Series(model.feature_importances_, index=feature_names)
 feature_importance.sort_values(ascending=False).plot(kind='bar')
 plt.title("Feature Importance")
 plt.show()
-```
 
-```python id="rf009"
+
 # Shows which features contribute most to prediction.
 # Helps in feature selection and interpretation.
-```
+
 
 ---
 
@@ -163,7 +154,6 @@ plt.show()
 
 # =========================================
 
-```python id="rf010"
 param_grid = {
     'n_estimators': [50, 100, 200],      # number of trees
     'max_depth': [None, 5, 10],          # depth of each tree
@@ -184,7 +174,7 @@ grid.fit(X_train, y_train)
 best_model = grid.best_estimator_
 
 print("Best Params:", grid.best_params_)
-```
+
 
 ---
 
@@ -194,7 +184,6 @@ print("Best Params:", grid.best_params_)
 
 # =========================================
 
-```python id="rf011"
 # n_estimators:
 # Number of trees in forest.
 # More trees → better performance but slower.
@@ -212,7 +201,7 @@ print("Best Params:", grid.best_params_)
 # max_features:
 # Number of features used per split.
 # Controls randomness and diversity.
-```
+
 
 ---
 
@@ -222,12 +211,11 @@ print("Best Params:", grid.best_params_)
 
 # =========================================
 
-```python id="rf012"
 y_pred = best_model.predict(X_test)
 
 accuracy = accuracy_score(y_test, y_pred)
 print("Final Accuracy:", accuracy)
-```
+
 
 ---
 
@@ -237,7 +225,6 @@ print("Final Accuracy:", accuracy)
 
 # =========================================
 
-```python id="rf013"
 y_train_pred = best_model.predict(X_train)
 
 train_acc = accuracy_score(y_train, y_train_pred)
@@ -248,7 +235,7 @@ print("Test Accuracy:", test_acc)
 
 # Random Forest usually reduces overfitting compared to decision tree.
 # But still possible if trees are too deep.
-```
+
 
 ---
 
@@ -258,7 +245,6 @@ print("Test Accuracy:", test_acc)
 
 # =========================================
 
-```python id="rf014"
 cv_scores = cross_val_score(best_model, X, y, cv=5, scoring='accuracy')
 
 print("CV Scores:", cv_scores)
@@ -267,7 +253,7 @@ print("Std Dev:", cv_scores.std())
 
 # Low std → stable model
 # High std → variance still exists
-```
+
 
 ---
 
@@ -277,7 +263,6 @@ print("Std Dev:", cv_scores.std())
 
 # =========================================
 
-```python id="rf015"
 train_sizes, train_scores, test_scores = learning_curve(
     best_model, X, y, cv=5,
     scoring='accuracy',
@@ -295,7 +280,7 @@ plt.title("Learning Curve")
 plt.show()
 
 # Smaller gap than decision tree → better generalization
-```
+
 
 ---
 
@@ -305,10 +290,9 @@ plt.show()
 
 # =========================================
 
-```python id="rf016"
 # Random Forest handles noise better than decision trees.
 # Because averaging multiple trees reduces impact of noisy data.
-```
+
 
 ---
 
@@ -318,7 +302,6 @@ plt.show()
 
 # =========================================
 
-```python id="rf017"
 # Random Forest is an ensemble of decision trees.
 
 # Key strength:
@@ -331,7 +314,7 @@ plt.show()
 
 # Advantage:
 # Handles noise and non-linearity well
-```
+
 
 ---
 

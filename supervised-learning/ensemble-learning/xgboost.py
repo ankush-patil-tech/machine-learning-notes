@@ -1,14 +1,11 @@
-Now we’re at the **most important model for interviews + real-world ML** 🔥🔥🔥
-
----
 
 # =========================================
 
-# 12. XGBOOST (EXTREME GRADIENT BOOSTING)
+# XGBOOST (EXTREME GRADIENT BOOSTING)
 
 # =========================================
 
-```python id="xgb001"
+
 # =========================================
 # IMPORTS
 # =========================================
@@ -34,7 +31,7 @@ y_pred = model.predict(X_test)
 # Final prediction combines all boosted trees.
 
 # Used for: competitions, fraud detection, recommendation systems, tabular data
-```
+
 
 ---
 
@@ -44,7 +41,6 @@ y_pred = model.predict(X_test)
 
 # =========================================
 
-```python id="xgb002"
 # Key Idea:
 # Same as Gradient Boosting but optimized
 
@@ -55,7 +51,7 @@ y_pred = model.predict(X_test)
 
 # Goal:
 # Minimize loss function using gradient descent
-```
+
 
 ---
 
@@ -65,7 +61,6 @@ y_pred = model.predict(X_test)
 
 # =========================================
 
-```python id="xgb003"
 # Boosting:
 # Sequential learning from errors
 
@@ -77,7 +72,7 @@ y_pred = model.predict(X_test)
 
 # Weighted learning:
 # Focus more on difficult samples
-```
+
 
 ---
 
@@ -87,7 +82,6 @@ y_pred = model.predict(X_test)
 
 # =========================================
 
-```python id="xgb004"
 accuracy = accuracy_score(y_test, y_pred)
 precision = precision_score(y_test, y_pred)
 recall = recall_score(y_test, y_pred)
@@ -97,7 +91,7 @@ print("Accuracy:", accuracy)
 print("Precision:", precision)
 print("Recall:", recall)
 print("F1 Score:", f1)
-```
+
 
 ---
 
@@ -107,10 +101,9 @@ print("F1 Score:", f1)
 
 # =========================================
 
-```python id="xgb005"
 cm = confusion_matrix(y_test, y_pred)
 print("Confusion Matrix:\n", cm)
-```
+
 
 ---
 
@@ -120,7 +113,6 @@ print("Confusion Matrix:\n", cm)
 
 # =========================================
 
-```python id="xgb006"
 param_grid = {
     'n_estimators': [100, 200],        # number of trees
     'learning_rate': [0.01, 0.1],      # step size
@@ -141,7 +133,7 @@ grid.fit(X_train, y_train)
 best_model = grid.best_estimator_
 
 print("Best Params:", grid.best_params_)
-```
+
 
 ---
 
@@ -151,7 +143,6 @@ print("Best Params:", grid.best_params_)
 
 # =========================================
 
-```python id="xgb007"
 # n_estimators:
 # Number of boosting rounds (trees)
 
@@ -166,7 +157,7 @@ print("Best Params:", grid.best_params_)
 
 # colsample_bytree:
 # Fraction of features used (adds randomness)
-```
+
 
 ---
 
@@ -176,12 +167,11 @@ print("Best Params:", grid.best_params_)
 
 # =========================================
 
-```python id="xgb008"
 y_pred = best_model.predict(X_test)
 
 accuracy = accuracy_score(y_test, y_pred)
 print("Final Accuracy:", accuracy)
-```
+
 
 ---
 
@@ -191,7 +181,6 @@ print("Final Accuracy:", accuracy)
 
 # =========================================
 
-```python id="xgb009"
 y_train_pred = best_model.predict(X_train)
 
 train_acc = accuracy_score(y_train, y_train_pred)
@@ -201,7 +190,7 @@ print("Train Accuracy:", train_acc)
 print("Test Accuracy:", test_acc)
 
 # XGBoost handles overfitting better due to regularization.
-```
+
 
 ---
 
@@ -211,7 +200,6 @@ print("Test Accuracy:", test_acc)
 
 # =========================================
 
-```python id="xgb010"
 cv_scores = cross_val_score(best_model, X, y, cv=5, scoring='accuracy')
 
 print("CV Scores:", cv_scores)
@@ -219,7 +207,7 @@ print("Mean CV:", cv_scores.mean())
 print("Std Dev:", cv_scores.std())
 
 # Low std → stable model
-```
+
 
 ---
 
@@ -229,7 +217,6 @@ print("Std Dev:", cv_scores.std())
 
 # =========================================
 
-```python id="xgb011"
 train_sizes, train_scores, test_scores = learning_curve(
     best_model, X, y, cv=5,
     scoring='accuracy',
@@ -245,7 +232,7 @@ plt.plot(train_sizes, test_mean, label="Validation Accuracy")
 plt.legend()
 plt.title("Learning Curve")
 plt.show()
-```
+
 
 ---
 
@@ -255,12 +242,11 @@ plt.show()
 
 # =========================================
 
-```python id="xgb012"
 # XGBoost handles noise better than basic Gradient Boosting.
 # Regularization helps ignore noisy patterns.
 
 # Still requires proper tuning.
-```
+
 
 ---
 
@@ -270,7 +256,6 @@ plt.show()
 
 # =========================================
 
-```python id="xgb013"
 import pandas as pd
 
 importance = best_model.feature_importances_
@@ -278,12 +263,11 @@ importance = best_model.feature_importances_
 pd.Series(importance).sort_values(ascending=False).plot(kind='bar')
 plt.title("Feature Importance")
 plt.show()
-```
 
-```python id="xgb014"
+
 # Shows which features influence predictions most.
 # Helps in feature selection and interpretation.
-```
+
 
 ---
 
@@ -293,7 +277,6 @@ plt.show()
 
 # =========================================
 
-```python id="xgb015"
 # XGBoost is an optimized Gradient Boosting algorithm.
 
 # Key strength:
@@ -306,6 +289,6 @@ plt.show()
 # Handles missing data, regularization, scalable
 
 # Most used model in real-world ML
-```
+
 
 ---

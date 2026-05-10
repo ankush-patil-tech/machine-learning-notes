@@ -1,14 +1,9 @@
-You’ve basically covered the **entire core ML stack 🔥** — but let’s finish it properly with the **last important model + concept**
+# =========================================
 
----
+# ADABOOST (ADAPTIVE BOOSTING)
 
 # =========================================
 
-# 15. ADABOOST (ADAPTIVE BOOSTING)
-
-# =========================================
-
-```python id="ada001"
 # =========================================
 # IMPORTS
 # =========================================
@@ -32,7 +27,7 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 
 # Used for: classification tasks where boosting simple models improves accuracy
-```
+
 
 ---
 
@@ -42,7 +37,6 @@ y_pred = model.predict(X_test)
 
 # =========================================
 
-```python id="ada002"
 # Key Idea:
 # Sequentially train models and adjust weights of data points
 
@@ -54,7 +48,7 @@ y_pred = model.predict(X_test)
 
 # Goal:
 # Reduce overall classification error
-```
+
 
 ---
 
@@ -64,7 +58,6 @@ y_pred = model.predict(X_test)
 
 # =========================================
 
-```python id="ada003"
 # Weak Learners:
 # Usually decision stumps (trees with depth=1)
 
@@ -73,7 +66,7 @@ y_pred = model.predict(X_test)
 
 # Final Prediction:
 # Weighted combination of all models
-```
+
 
 ---
 
@@ -83,7 +76,6 @@ y_pred = model.predict(X_test)
 
 # =========================================
 
-```python id="ada004"
 accuracy = accuracy_score(y_test, y_pred)
 precision = precision_score(y_test, y_pred)
 recall = recall_score(y_test, y_pred)
@@ -93,7 +85,7 @@ print("Accuracy:", accuracy)
 print("Precision:", precision)
 print("Recall:", recall)
 print("F1 Score:", f1)
-```
+
 
 ---
 
@@ -103,10 +95,9 @@ print("F1 Score:", f1)
 
 # =========================================
 
-```python id="ada005"
 cm = confusion_matrix(y_test, y_pred)
 print("Confusion Matrix:\n", cm)
-```
+
 
 ---
 
@@ -116,7 +107,6 @@ print("Confusion Matrix:\n", cm)
 
 # =========================================
 
-```python id="ada006"
 param_grid = {
     'n_estimators': [50, 100, 200],     # number of weak learners
     'learning_rate': [0.01, 0.1, 1.0]   # controls contribution of each model
@@ -134,7 +124,7 @@ grid.fit(X_train, y_train)
 best_model = grid.best_estimator_
 
 print("Best Params:", grid.best_params_)
-```
+
 
 ---
 
@@ -144,7 +134,6 @@ print("Best Params:", grid.best_params_)
 
 # =========================================
 
-```python id="ada007"
 # n_estimators:
 # Number of weak learners
 
@@ -152,7 +141,7 @@ print("Best Params:", grid.best_params_)
 # Controls how much each model contributes
 # Lower → slower learning, better generalization
 # Higher → faster but risk overfitting
-```
+
 
 ---
 
@@ -162,7 +151,6 @@ print("Best Params:", grid.best_params_)
 
 # =========================================
 
-```python id="ada008"
 y_train_pred = best_model.predict(X_train)
 
 train_acc = accuracy_score(y_train, y_train_pred)
@@ -172,7 +160,7 @@ print("Train Accuracy:", train_acc)
 print("Test Accuracy:", test_acc)
 
 # AdaBoost can overfit if too many estimators are used
-```
+
 
 ---
 
@@ -182,12 +170,11 @@ print("Test Accuracy:", test_acc)
 
 # =========================================
 
-```python id="ada009"
 cv_scores = cross_val_score(best_model, X, y, cv=5, scoring='accuracy')
 
 print("Mean CV:", cv_scores.mean())
 print("Std Dev:", cv_scores.std())
-```
+
 
 ---
 
@@ -197,7 +184,6 @@ print("Std Dev:", cv_scores.std())
 
 # =========================================
 
-```python id="ada010"
 train_sizes, train_scores, test_scores = learning_curve(
     best_model, X, y, cv=5,
     scoring='accuracy',
@@ -213,7 +199,7 @@ plt.plot(train_sizes, test_mean, label="Validation Accuracy")
 plt.legend()
 plt.title("Learning Curve")
 plt.show()
-```
+
 
 ---
 
@@ -223,12 +209,11 @@ plt.show()
 
 # =========================================
 
-```python id="ada011"
 # AdaBoost is very sensitive to noise and outliers.
 # Because it focuses more on misclassified points (including noisy ones).
 
 # Noisy data can mislead the model.
-```
+
 
 ---
 
@@ -238,7 +223,6 @@ plt.show()
 
 # =========================================
 
-```python id="ada012"
 # AdaBoost is a boosting algorithm that focuses on mistakes.
 
 # Key strength:
@@ -249,6 +233,6 @@ plt.show()
 
 # Limitation:
 # Sensitive to noise
-```
+
 
 ---

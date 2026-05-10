@@ -1,11 +1,11 @@
 
 # =========================================
 
-# 5. SUPPORT VECTOR MACHINE (SVM)
+# SUPPORT VECTOR MACHINE (SVM)
 
 # =========================================
 
-```python id="svm001"
+
 # =========================================
 # IMPORTS
 # =========================================
@@ -34,7 +34,7 @@ y_prob = model.predict_proba(X_test)[:, 1]
 # Gives probability estimates (useful for threshold tuning)
 
 # Used for: text classification, image recognition, bioinformatics
-```
+
 
 ---
 
@@ -44,7 +44,7 @@ y_prob = model.predict_proba(X_test)[:, 1]
 
 # =========================================
 
-```python id="svm002"
+
 # Hyperplane:
 # A line (2D) or plane (3D) that separates classes.
 
@@ -60,7 +60,7 @@ y_prob = model.predict_proba(X_test)[:, 1]
 
 # Example:
 # Classifying emails into spam/not spam
-```
+
 
 ---
 
@@ -70,7 +70,7 @@ y_prob = model.predict_proba(X_test)[:, 1]
 
 # =========================================
 
-```python id="svm003"
+
 # Linear Kernel:
 linear_model = SVC(kernel='linear')
 # Used when data is linearly separable.
@@ -86,16 +86,16 @@ rbf_model = SVC(kernel='rbf')
 
 # Sigmoid Kernel:
 sigmoid_model = SVC(kernel='sigmoid')
-```
 
-```python id="svm004"
+
+
 # Kernel trick:
 # Transforms data into higher dimensions to make it separable.
 
 # Choose:
 # Linear → simple data
 # RBF → complex data (default best choice)
-```
+
 
 ---
 
@@ -105,7 +105,7 @@ sigmoid_model = SVC(kernel='sigmoid')
 
 # =========================================
 
-```python id="svm005"
+
 accuracy = accuracy_score(y_test, y_pred)
 precision = precision_score(y_test, y_pred)
 recall = recall_score(y_test, y_pred)
@@ -115,7 +115,7 @@ print("Accuracy:", accuracy)
 print("Precision:", precision)
 print("Recall:", recall)
 print("F1 Score:", f1)
-```
+
 
 ---
 
@@ -125,14 +125,14 @@ print("F1 Score:", f1)
 
 # =========================================
 
-```python id="svm006"
+
 # Accuracy → overall correctness
 
 # Precision → important when false positives matter
 # Recall → important when false negatives matter
 
 # F1 Score → balances both
-```
+
 
 ---
 
@@ -142,10 +142,10 @@ print("F1 Score:", f1)
 
 # =========================================
 
-```python id="svm007"
+
 cm = confusion_matrix(y_test, y_pred)
 print("Confusion Matrix:\n", cm)
-```
+
 
 ---
 
@@ -155,7 +155,7 @@ print("Confusion Matrix:\n", cm)
 
 # =========================================
 
-```python id="svm008"
+
 # Only works for 2 features
 if X.shape[1] == 2:
     plt.scatter(X[:, 0], X[:, 1], c=y, cmap='coolwarm')
@@ -175,13 +175,13 @@ if X.shape[1] == 2:
     ax.contour(XX, YY, Z, levels=[0])
     plt.title("Decision Boundary")
     plt.show()
-```
 
-```python id="svm009"
+
+
 # Boundary separates classes.
 # Support vectors lie near boundary.
 # Wider margin → better model
-```
+
 
 ---
 
@@ -191,7 +191,7 @@ if X.shape[1] == 2:
 
 # =========================================
 
-```python id="svm010"
+
 param_grid = {
     'C': [0.1, 1, 10],         # regularization parameter
     'kernel': ['linear', 'rbf'],
@@ -210,7 +210,7 @@ grid.fit(X_train, y_train)
 best_model = grid.best_estimator_
 
 print("Best Params:", grid.best_params_)
-```
+
 
 ---
 
@@ -220,7 +220,7 @@ print("Best Params:", grid.best_params_)
 
 # =========================================
 
-```python id="svm011"
+
 # C:
 # Controls trade-off between margin and classification error.
 # Small C → wider margin → less overfitting
@@ -233,7 +233,7 @@ print("Best Params:", grid.best_params_)
 
 # kernel:
 # Determines type of decision boundary
-```
+
 
 ---
 
@@ -243,12 +243,12 @@ print("Best Params:", grid.best_params_)
 
 # =========================================
 
-```python id="svm012"
+
 y_pred = best_model.predict(X_test)
 
 accuracy = accuracy_score(y_test, y_pred)
 print("Final Accuracy:", accuracy)
-```
+
 
 ---
 
@@ -258,7 +258,7 @@ print("Final Accuracy:", accuracy)
 
 # =========================================
 
-```python id="svm013"
+
 y_train_pred = best_model.predict(X_train)
 
 train_acc = accuracy_score(y_train, y_train_pred)
@@ -269,7 +269,7 @@ print("Test Accuracy:", test_acc)
 
 # Train high, Test low → Overfitting
 # Both low → Underfitting
-```
+
 
 ---
 
@@ -279,7 +279,7 @@ print("Test Accuracy:", test_acc)
 
 # =========================================
 
-```python id="svm014"
+
 cv_scores = cross_val_score(best_model, X, y, cv=5, scoring='accuracy')
 
 print("CV Scores:", cv_scores)
@@ -287,7 +287,7 @@ print("Mean CV:", cv_scores.mean())
 print("Std Dev:", cv_scores.std())
 
 # High std → unstable model
-```
+
 
 ---
 
@@ -297,7 +297,7 @@ print("Std Dev:", cv_scores.std())
 
 # =========================================
 
-```python id="svm015"
+
 train_sizes, train_scores, test_scores = learning_curve(
     best_model, X, y, cv=5,
     scoring='accuracy',
@@ -315,7 +315,7 @@ plt.title("Learning Curve")
 plt.show()
 
 # Large gap → Overfitting
-```
+
 
 ---
 
@@ -325,12 +325,12 @@ plt.show()
 
 # =========================================
 
-```python id="svm016"
+
 # SVM is sensitive to noise, especially when using hard margins.
 # Outliers can affect boundary significantly.
 
 # Using soft margin (C parameter) helps handle noise.
-```
+
 
 ---
 
@@ -340,7 +340,7 @@ plt.show()
 
 # =========================================
 
-```python id="svm017"
+
 # SVM finds optimal boundary with maximum margin.
 
 # Works well for high-dimensional data.
@@ -353,6 +353,6 @@ plt.show()
 
 # Limitation:
 # Slow on large datasets
-```
+
 
 ---

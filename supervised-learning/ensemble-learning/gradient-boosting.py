@@ -1,14 +1,10 @@
-Now we’re entering **top-tier ML territory (VERY IMPORTANT for jobs + interviews)** 🔥
+# =========================================
 
----
+# GRADIENT BOOSTING (GBM)
 
 # =========================================
 
-# 11. GRADIENT BOOSTING (GBM)
 
-# =========================================
-
-```python id="gb001"
 # =========================================
 # IMPORTS
 # =========================================
@@ -34,7 +30,7 @@ y_pred = model.predict(X_test)
 # Final prediction combines all weak learners.
 
 # Used for: fraud detection, ranking systems, structured data problems
-```
+
 
 ---
 
@@ -44,7 +40,6 @@ y_pred = model.predict(X_test)
 
 # =========================================
 
-```python id="gb002"
 # Key Idea:
 # Instead of building independent trees (like Random Forest),
 # models are built sequentially.
@@ -57,7 +52,7 @@ y_pred = model.predict(X_test)
 
 # Goal:
 # Reduce error gradually using gradient descent
-```
+
 
 ---
 
@@ -67,7 +62,6 @@ y_pred = model.predict(X_test)
 
 # =========================================
 
-```python id="gb003"
 # Weak Learners:
 # Small decision trees (usually shallow)
 
@@ -79,7 +73,7 @@ y_pred = model.predict(X_test)
 
 # Boosting:
 # Focus on correcting mistakes
-```
+
 
 ---
 
@@ -89,7 +83,6 @@ y_pred = model.predict(X_test)
 
 # =========================================
 
-```python id="gb004"
 accuracy = accuracy_score(y_test, y_pred)
 precision = precision_score(y_test, y_pred)
 recall = recall_score(y_test, y_pred)
@@ -99,7 +92,7 @@ print("Accuracy:", accuracy)
 print("Precision:", precision)
 print("Recall:", recall)
 print("F1 Score:", f1)
-```
+
 
 ---
 
@@ -109,10 +102,10 @@ print("F1 Score:", f1)
 
 # =========================================
 
-```python id="gb005"
+005"
 cm = confusion_matrix(y_test, y_pred)
 print("Confusion Matrix:\n", cm)
-```
+
 
 ---
 
@@ -122,7 +115,6 @@ print("Confusion Matrix:\n", cm)
 
 # =========================================
 
-```python id="gb006"
 param_grid = {
     'n_estimators': [50, 100, 200],      # number of trees
     'learning_rate': [0.01, 0.1, 0.2],   # step size
@@ -142,7 +134,7 @@ grid.fit(X_train, y_train)
 best_model = grid.best_estimator_
 
 print("Best Params:", grid.best_params_)
-```
+
 
 ---
 
@@ -152,7 +144,6 @@ print("Best Params:", grid.best_params_)
 
 # =========================================
 
-```python id="gb007"
 # n_estimators:
 # Number of trees → more trees improve learning but increase time
 
@@ -166,7 +157,7 @@ print("Best Params:", grid.best_params_)
 
 # min_samples_split:
 # Prevents unnecessary splits
-```
+
 
 ---
 
@@ -176,12 +167,11 @@ print("Best Params:", grid.best_params_)
 
 # =========================================
 
-```python id="gb008"
 y_pred = best_model.predict(X_test)
 
 accuracy = accuracy_score(y_test, y_pred)
 print("Final Accuracy:", accuracy)
-```
+
 
 ---
 
@@ -191,7 +181,6 @@ print("Final Accuracy:", accuracy)
 
 # =========================================
 
-```python id="gb009"
 y_train_pred = best_model.predict(X_train)
 
 train_acc = accuracy_score(y_train, y_train_pred)
@@ -202,7 +191,7 @@ print("Test Accuracy:", test_acc)
 
 # Train high, Test low → Overfitting
 # Both low → Underfitting
-```
+
 
 ---
 
@@ -212,7 +201,6 @@ print("Test Accuracy:", test_acc)
 
 # =========================================
 
-```python id="gb010"
 cv_scores = cross_val_score(best_model, X, y, cv=5, scoring='accuracy')
 
 print("CV Scores:", cv_scores)
@@ -220,7 +208,7 @@ print("Mean CV:", cv_scores.mean())
 print("Std Dev:", cv_scores.std())
 
 # Low std → stable model
-```
+
 
 ---
 
@@ -230,7 +218,6 @@ print("Std Dev:", cv_scores.std())
 
 # =========================================
 
-```python id="gb011"
 train_sizes, train_scores, test_scores = learning_curve(
     best_model, X, y, cv=5,
     scoring='accuracy',
@@ -248,7 +235,7 @@ plt.title("Learning Curve")
 plt.show()
 
 # Large gap → Overfitting
-```
+
 
 ---
 
@@ -258,13 +245,12 @@ plt.show()
 
 # =========================================
 
-```python id="gb012"
 # Gradient Boosting is sensitive to noise.
 # Because it tries to correct every error, including noise.
 
 # Solution:
 # Use small learning rate + regularization
-```
+
 
 ---
 
@@ -274,7 +260,6 @@ plt.show()
 
 # =========================================
 
-```python id="gb013"
 # Gradient Boosting builds models sequentially.
 
 # Key strength:
@@ -288,7 +273,7 @@ plt.show()
 
 # Limitation:
 # Slow and sensitive to noise
-```
+
 
 ---
 

@@ -1,14 +1,10 @@
-Love the momentum 🔥 — now we move to a **super fast + theory-heavy model (very common in interviews)**
+# =========================================
 
----
+# NAIVE BAYES
 
 # =========================================
 
-# 7. NAIVE BAYES
 
-# =========================================
-
-```python id="nb001"
 # =========================================
 # IMPORTS
 # =========================================
@@ -34,7 +30,7 @@ y_pred = model.predict(X_test)
 # Predicts class based on highest probability.
 
 # Used for: spam detection, text classification, sentiment analysis
-```
+
 
 ---
 
@@ -44,7 +40,6 @@ y_pred = model.predict(X_test)
 
 # =========================================
 
-```python id="nb002"
 # Bayes Theorem:
 # P(A|B) = (P(B|A) * P(A)) / P(B)
 
@@ -56,7 +51,6 @@ y_pred = model.predict(X_test)
 
 # Example:
 # Email classification based on words (assumes each word is independent)
-```
 
 ---
 
@@ -66,7 +60,6 @@ y_pred = model.predict(X_test)
 
 # =========================================
 
-```python id="nb003"
 # Gaussian Naive Bayes:
 gaussian = GaussianNB()
 # Used when features are continuous (numerical)
@@ -76,12 +69,11 @@ multinomial = MultinomialNB()
 # Used for text data (word counts, frequencies)
 
 multinomial.fit(X_train, y_train)
-```
 
-```python id="nb004"
+
 # Gaussian → numeric data
 # Multinomial → text data (NLP tasks)
-```
+
 
 ---
 
@@ -91,7 +83,6 @@ multinomial.fit(X_train, y_train)
 
 # =========================================
 
-```python id="nb005"
 accuracy = accuracy_score(y_test, y_pred)
 precision = precision_score(y_test, y_pred)
 recall = recall_score(y_test, y_pred)
@@ -101,7 +92,7 @@ print("Accuracy:", accuracy)
 print("Precision:", precision)
 print("Recall:", recall)
 print("F1 Score:", f1)
-```
+
 
 ---
 
@@ -111,14 +102,13 @@ print("F1 Score:", f1)
 
 # =========================================
 
-```python id="nb006"
 # Accuracy → overall correctness
 
 # Precision → important when false positives matter
 # Recall → important when false negatives matter
 
 # F1 Score → balance between precision and recall
-```
+
 
 ---
 
@@ -128,10 +118,9 @@ print("F1 Score:", f1)
 
 # =========================================
 
-```python id="nb007"
 cm = confusion_matrix(y_test, y_pred)
 print("Confusion Matrix:\n", cm)
-```
+
 
 ---
 
@@ -141,10 +130,10 @@ print("Confusion Matrix:\n", cm)
 
 # =========================================
 
-```python id="nb008"
+
 # Naive Bayes does not have a simple geometric boundary like SVM.
 # It works using probability distributions instead of distances.
-```
+
 
 ---
 
@@ -154,7 +143,6 @@ print("Confusion Matrix:\n", cm)
 
 # =========================================
 
-```python id="nb009"
 param_grid = {
     'var_smoothing': [1e-9, 1e-8, 1e-7]
 }
@@ -172,7 +160,7 @@ grid.fit(X_train, y_train)
 best_model = grid.best_estimator_
 
 print("Best Params:", grid.best_params_)
-```
+
 
 ---
 
@@ -182,12 +170,11 @@ print("Best Params:", grid.best_params_)
 
 # =========================================
 
-```python id="nb010"
 # var_smoothing:
 # Adds small value to variance to avoid division by zero.
 
 # Helps stabilize probability calculations.
-```
+
 
 ---
 
@@ -197,12 +184,11 @@ print("Best Params:", grid.best_params_)
 
 # =========================================
 
-```python id="nb011"
 y_pred = best_model.predict(X_test)
 
 accuracy = accuracy_score(y_test, y_pred)
 print("Final Accuracy:", accuracy)
-```
+
 
 ---
 
@@ -212,7 +198,6 @@ print("Final Accuracy:", accuracy)
 
 # =========================================
 
-```python id="nb012"
 y_train_pred = best_model.predict(X_train)
 
 train_acc = accuracy_score(y_train, y_train_pred)
@@ -223,7 +208,7 @@ print("Test Accuracy:", test_acc)
 
 # Usually Naive Bayes has low variance (less overfitting)
 # But can underfit due to strong assumptions
-```
+
 
 ---
 
@@ -233,7 +218,6 @@ print("Test Accuracy:", test_acc)
 
 # =========================================
 
-```python id="nb013"
 cv_scores = cross_val_score(best_model, X, y, cv=5, scoring='accuracy')
 
 print("CV Scores:", cv_scores)
@@ -241,7 +225,7 @@ print("Mean CV:", cv_scores.mean())
 print("Std Dev:", cv_scores.std())
 
 # Low std → stable model
-```
+
 
 ---
 
@@ -251,7 +235,6 @@ print("Std Dev:", cv_scores.std())
 
 # =========================================
 
-```python id="nb014"
 train_sizes, train_scores, test_scores = learning_curve(
     best_model, X, y, cv=5,
     scoring='accuracy',
@@ -269,7 +252,7 @@ plt.title("Learning Curve")
 plt.show()
 
 # Often shows small gap → low variance model
-```
+
 
 ---
 
@@ -279,12 +262,11 @@ plt.show()
 
 # =========================================
 
-```python id="nb015"
 # Naive Bayes handles noise moderately well.
 # But independence assumption may fail in real-world data.
 
 # Performance drops when features are highly correlated.
-```
+
 
 ---
 
@@ -294,7 +276,6 @@ plt.show()
 
 # =========================================
 
-```python id="nb016"
 # Naive Bayes is a fast probabilistic classifier.
 
 # Key strength:
@@ -308,6 +289,6 @@ plt.show()
 
 # Limitation:
 # Can underfit due to strong assumptions
-```
+
 
 ---

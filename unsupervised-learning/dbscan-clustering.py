@@ -1,14 +1,9 @@
-Let’s go 🔥 — now we move to a **very powerful clustering algorithm that fixes K-Means problems**
+# =========================================
 
----
+# DBSCAN (DENSITY-BASED CLUSTERING)
 
 # =========================================
 
-# 9. DBSCAN (DENSITY-BASED CLUSTERING)
-
-# =========================================
-
-```python id="db001"
 # =========================================
 # IMPORTS
 # =========================================
@@ -30,7 +25,7 @@ labels = model.fit_predict(X)
 # Assigns cluster labels (-1 means noise/outlier).
 
 # Used for: anomaly detection, spatial clustering, fraud detection
-```
+
 
 ---
 
@@ -40,7 +35,6 @@ labels = model.fit_predict(X)
 
 # =========================================
 
-```python id="db002"
 # Key Idea:
 # Points close together form clusters (dense regions)
 
@@ -51,7 +45,7 @@ labels = model.fit_predict(X)
 
 # Goal:
 # Find dense regions and separate noise
-```
+
 
 ---
 
@@ -61,17 +55,15 @@ labels = model.fit_predict(X)
 
 # =========================================
 
-```python id="db003"
 if X.shape[1] == 2:
     plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis')
     plt.title("DBSCAN Clustering")
     plt.show()
-```
 
-```python id="db004"
+
 # Different colors → clusters
 # Label -1 → noise (outliers)
-```
+
 
 ---
 
@@ -81,21 +73,19 @@ if X.shape[1] == 2:
 
 # =========================================
 
-```python id="db005"
 # Remove noise points before evaluation
 valid_points = labels != -1
 
 if len(set(labels[valid_points])) > 1:
     score = silhouette_score(X[valid_points], labels[valid_points])
     print("Silhouette Score:", score)
-```
+
 
 ---
 
-```python id="db006"
 # Higher silhouette score → better clustering
 # DBSCAN works best when clusters are dense and well-separated
-```
+
 
 ---
 
@@ -105,7 +95,6 @@ if len(set(labels[valid_points])) > 1:
 
 # =========================================
 
-```python id="db007"
 # eps:
 # Maximum distance between points to be considered neighbors
 
@@ -113,7 +102,7 @@ if len(set(labels[valid_points])) > 1:
 # Minimum number of points required to form a cluster
 
 model = DBSCAN(eps=0.3, min_samples=10)
-```
+
 
 ---
 
@@ -123,7 +112,6 @@ model = DBSCAN(eps=0.3, min_samples=10)
 
 # =========================================
 
-```python id="db008"
 # eps:
 # Small eps → many small clusters + more noise
 # Large eps → fewer clusters, may merge clusters
@@ -131,7 +119,7 @@ model = DBSCAN(eps=0.3, min_samples=10)
 # min_samples:
 # Higher value → stricter clustering (fewer clusters)
 # Lower value → more clusters
-```
+
 
 ---
 
@@ -141,7 +129,6 @@ model = DBSCAN(eps=0.3, min_samples=10)
 
 # =========================================
 
-```python id="db009"
 best_score = -1
 best_params = {}
 
@@ -160,7 +147,7 @@ for eps in [0.3, 0.5, 0.7]:
                 best_params = {"eps": eps, "min_samples": min_samples}
 
 print("Best Params:", best_params)
-```
+
 
 ---
 
@@ -170,13 +157,12 @@ print("Best Params:", best_params)
 
 # =========================================
 
-```python id="db010"
 # Too small eps → Underfitting (many points marked as noise)
 
 # Too large eps → Overfitting (clusters merge incorrectly)
 
 # Need balance for meaningful clusters
-```
+
 
 ---
 
@@ -186,14 +172,13 @@ print("Best Params:", best_params)
 
 # =========================================
 
-```python id="db011"
 # DBSCAN does not use cross-validation.
 # Because it is unsupervised (no labels available).
 
 # Instead use:
 # - Silhouette score
 # - Visual inspection
-```
+
 
 ---
 
@@ -203,13 +188,12 @@ print("Best Params:", best_params)
 
 # =========================================
 
-```python id="db012"
 # DBSCAN is very good at handling noise.
 # It automatically labels outliers as -1.
 
 # Advantage over K-Means:
 # Does not force every point into a cluster.
-```
+
 
 ---
 
@@ -219,7 +203,6 @@ print("Best Params:", best_params)
 
 # =========================================
 
-```python id="db013"
 # K-Means:
 # - Needs number of clusters (K)
 # - Sensitive to noise
@@ -229,7 +212,7 @@ print("Best Params:", best_params)
 # - No need to define clusters
 # - Handles noise well
 # - Works for irregular shapes
-```
+
 
 ---
 
@@ -239,7 +222,6 @@ print("Best Params:", best_params)
 
 # =========================================
 
-```python id="db014"
 # DBSCAN is a density-based clustering algorithm.
 
 # Key strength:
@@ -253,7 +235,7 @@ print("Best Params:", best_params)
 
 # Limitation:
 # Sensitive to parameter selection
-```
+
 
 ---
 
